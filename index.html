@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Good Life Through the Lens | Neshat Shahabi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2c2c2c;
+            --accent: #d4a574;
+            --light: #f5f1eb;
+            --soft-gray: #8a8a8a;
+            --deep-brown: #4a3f35;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: var(--light);
+            color: var(--primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(245, 241, 235, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid rgba(212, 165, 116, 0.2);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary);
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            transition: color 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        /* Main Content */
+        main {
+            margin-top: 80px;
+        }
+
+        .page-section {
+            display: none;
+            min-height: 100vh;
+            padding: 4rem 2rem;
+            animation: fadeIn 0.6s ease;
+        }
+
+        .page-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 6rem 2rem 4rem;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(212, 165, 116, 0.15), transparent);
+            border-radius: 50%;
+            z-index: -1;
+        }
+
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4.5rem;
+            font-weight: 300;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--soft-gray);
+            font-weight: 300;
+            letter-spacing: 3px;
+            margin-bottom: 3rem;
+        }
+
+        /* Page Headers */
+        .page-header {
+            text-align: center;
+            padding: 3rem 0 4rem;
+            position: relative;
+        }
+
+        .page-header h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.5rem;
+            font-weight: 400;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .page-header .intro {
+            max-width: 800px;
+            margin: 2rem auto 0;
+            font-size: 1.1rem;
+            line-height: 1.9;
+            color: var(--deep-brown);
+        }
+
+        .page-divider {
+            width: 80px;
+            height: 2px;
+            background: var(--accent);
+            margin: 2rem auto;
+        }
+
+        /* Cover Letter */
+        .cover-letter {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 3rem;
+            background: white;
+            border-radius: 2px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+            line-height: 2;
+        }
+
+        .cover-letter p {
+            margin-bottom: 1.5rem;
+            text-align: justify;
+        }
+
+        .cover-letter .signature {
+            margin-top: 3rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-style: italic;
+        }
+
+        /* Artifacts Grid */
+        .artifacts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .artifact-card {
+            background: white;
+            border-radius: 2px;
+            overflow: hidden;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .artifact-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .artifact-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, var(--accent), var(--deep-brown));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            color: white;
+            font-weight: 300;
+        }
+
+        .artifact-content {
+            padding: 2rem;
+        }
+
+        .artifact-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .artifact-type {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            background: rgba(212, 165, 116, 0.15);
+            color: var(--accent);
+            border-radius: 20px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .artifact-reflection {
+            color: var(--deep-brown);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        /* Reflection Letter */
+        .reflection-letter {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 4rem;
+            background: white;
+            border-radius: 2px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+            line-height: 2;
+        }
+
+        .reflection-letter h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin: 2rem 0 1rem;
+        }
+
+        .reflection-letter p {
+            margin-bottom: 1.5rem;
+            text-align: justify;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: var(--primary);
+            color: var(--light);
+            margin-top: 6rem;
+        }
+
+        footer p {
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 3rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.8rem;
+            }
+
+            .artifacts-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .page-header h2 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo" onclick="showPage('home')">Through the Lens</a>
+            <ul class="nav-links">
+                <li><a href="#" onclick="showPage('home')">Home</a></li>
+                <li><a href="#" onclick="showPage('focus')">Focus</a></li>
+                <li><a href="#" onclick="showPage('exposure')">Exposure</a></li>
+                <li><a href="#" onclick="showPage('composition')">Composition</a></li>
+                <li><a href="#" onclick="showPage('development')">Development</a></li>
+                <li><a href="#" onclick="showPage('reflection')">Final Reflection</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <!-- HOME PAGE -->
+        <section id="home" class="page-section active">
+            <div class="hero">
+                <h1>A Good Life Through the Lens</h1>
+                <p class="subtitle">NESHAT SHAHABI</p>
+                <div class="page-divider"></div>
+            </div>
+
+            <div class="container">
+                <div class="cover-letter">
+                    <p>Hey there,</p>
+
+                    <p>Welcome to my ePortfolio. I decided to use photography as my theme because I love how taking pictures and living a good life actually have so much in common. When you take a photo, you have to think about what to focus on, how much light to let in, how to arrange everything in the frame, and then how to develop it into something beautiful. Living well is pretty similar when you think about it. You have to figure out what matters to you, stay open to new experiences, balance all the different parts of your life, and keep growing as a person.</p>
+
+                    <p>This ePortfolio is basically a collection of my journey through this course on the good life. But it goes beyond just what we did in class. This semester really made me think hard about big questions like what makes life worth living, how we find happiness and meaning, and why relationships and values matter so much. These are questions people have been asking forever, and I finally got the chance to explore them for myself.</p>
+
+                    <p>The Focus page is all about figuring out what really matters and where to put my energy. Just like a photographer chooses what to focus on in a shot, I had to learn what deserves my attention in life. On that page you will find stuff about my character strengths, my cultural identity, and how I have gotten better at making intentional choices instead of just going through the motions. The VIA Character Strengths test really helped me understand myself better.</p>
+
+                    <p>On the Exposure page, I share some really personal stuff. This page is about being vulnerable and open to experiences, kind of like how a camera needs to let in the right amount of light. I included my interview with my mom about what a good life means to her, a gratitude letter I wrote to my aunt Bita, and some discussion posts about happiness and love. Getting honest about my feelings and connections with people has taught me so much about what wellbeing really means.</p>
+
+                    <p>The Composition page shows how I try to balance everything in my life. Work, relationships, personal growth, helping others. It is like arranging all the elements in a photograph so they work together instead of clashing. I put my research paper about dogs and happiness on this page, along with a video project from another class and my volunteer work. These pieces show how everything in life connects, even when it does not seem like it at first.</p>
+
+                    <p>Development is the last themed page, and it is about growth and change. In photography, development is when you turn a blank negative into an actual picture. For me, this page is about how I have changed my thinking about happiness and the good life throughout this semester. I included reflections on resilience, my family immigration story, and how my ideas have evolved. Growth takes time and I am still figuring things out.</p>
+
+                    <p>Making this ePortfolio has honestly been one of the most meaningful projects I have done in college. It is not just an assignment. By pulling together work from different classes, my personal life, and this course, I started seeing patterns I never noticed before. A good life is not something you achieve once and then you are done. It is an ongoing practice of paying attention to what matters, staying open, keeping things balanced, and always growing.</p>
+
+                    <p>I made this ePortfolio for a bunch of different people. Obviously my professor needs to see it for a grade. But I also made it for my future self so I can look back and remember what I learned. I made it for my family and friends who have supported me. And I made it for anyone else who is trying to figure out what makes life good and meaningful. If you are reading this, I hope something here speaks to you and helps you think about your own life in a new way.</p>
+
+                    <p>Thanks for checking out my work. I hope it makes you see your own life through a fresh lens.</p>
+
+                    <p class="signature">With gratitude,<br>Neshat Shahabi</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOCUS PAGE -->
+        <section id="focus" class="page-section">
+            <div class="container">
+                <div class="page-header">
+                    <h2>Focus</h2>
+                    <div class="page-divider"></div>
+                    <p class="intro">In photography, focus is what makes certain things sharp and clear while everything else gets blurry. The same thing happens in life. We have to figure out what deserves our attention and energy. This page is all about how I learned to recognize my strengths, get clear on my values, and make better choices about where I spend my time. Through different tests, reflections, and personal stories, I got a much clearer picture of who I am and what I want my life to be about.</p>
+                </div>
+
+                <div class="artifacts-grid">
+                    <div class="artifact-card">
+                        <div class="artifact-image">01</div>
+                        <div class="artifact-content">
+                            <span class="artifact-type">Discussion Post</span>
+                            <h3 class="artifact-title">More Intentional Me: VIA Strengths & MBTI</h3>
+                            <p class="artifact-reflection">This discussion post was a big turning point for me in understanding myself better. I explored both my VIA Character Strengths and my MBTI personality type in the same post. My top strengths turned out to be Love of Learning, Creativity, and Appreciation of Beauty, which really explained why I get so into aesthetic experiences and learning new things. The screenshot I included shows my actual results from the test. What I learned is that I should focus on what comes naturally to me instead of trying to force myself to be someone I am not. That is what makes life feel authentic. I picked this piece because it shows how psychology tools can give you the clarity you need to focus your life on purpose instead of just wandering around.</p>
+                        </div>
+                    </div>
+
+                    <div class="artifact-card">
+                        <div class="artifact-image">02</div>
+                        <div class="artifact-content">
+                            <span class="artifact-type">Personal Essay</span>
+                            <h3 class="artifact-title">Essay on Cultural Identity (First Year Writing)</h3>
+                            <p class="artifact-reflection">I wrote this essay for my First Year Writing class about being Iranian American and how living between two cultures has shaped who I am and what I care about. I included it here because you cannot really know what to focus on in the future if you do not understand where you come from. The essay talks about how my family really values education, hospitality, and pushing through hard times. These values totally influence what I think a good life looks like. By thinking deeply about my cultural roots, I figured out which values I want to keep and which ones I want to question more. This piece shows that focusing your life starts with understanding your background and origins.</p>
+                        </div>
+                    </div>
+
+                    <div class="artifact-card">
+                        <div class="artifact-image">03</div>
+                        <div class="artifact-content">
+                            <span class="artifact-type">Personal Reflection</span>
+                            <h3 class="artifact-title">Haft Seen Nowruz Photo with Reflection</h3>
+                            <p class="artifact-reflection">This is a photo of my family Haft Seen table during Nowruz, which is Persian New Year. I wrote a reflection to go with it about tradition, starting fresh, and what we keep alive across generations. The table has seven items that all start with the letter S in Farsi, and each one represents something we hope for in the new year like growth, love, wisdom, and health. I chose this artifact because it shows how cultural traditions help us focus on what really matters. Every year when we set up this table together as a family, it is like this moment where we all pause and think about our values and what we want for the coming year. This tradition takes all my abstract thoughts about the good life and makes them real and concrete through an actual ritual I can touch and see.</p>
+                        </div>
+                    </div>
+
+                    <div class="artifact-card">
+                        <div class="artifact-image">04</div>
+                        <div class="artifact-content">
+                            <span class="artifact-type">Assessment Results</span>
+                            <h3 class="artifact-title">Person-Activity Fit Diagnostic</h3>
+                            <p class="artifact-reflection">This is a diagnostic tool we used in class from our positive psychology readings. It helps you figure out which happiness activities actually match your personality and life situation. My results showed that gratitude, savoring moments, and doing kind things for people worked best for me. But certain social activities were not really a good fit because I am more introverted. I put this here because it is a practical example of using self knowledge to make better choices. It is not enough to just know who you are. You have to actually use that knowledge to decide how to spend your time. The screenshot of my results reminds me that good focusing means matching what you do with who you actually are, not who you think you should be.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- EXPOSURE PAGE -->
+        <section id="exposure" class="page-section">
+            <div class="container">
+                <div class="page-header">
+                    <h2>Exposure</h2>
+                    <div class="page-divider"></div>
+                    <p class="intro">In photography, exposure is all about how much light you let into the camera. Too little and the picture is dark and boring. Too much and everything is washed out. Living well needs the same kind of balance. You have to open yourself up to experiences, emotions, and connections with people, but you also need healthy boundaries. This page has artifacts that show my journey toward being more vulnerable, grateful, and emotionally honest. It is about learning to show my real self to the world and to let the world actually affect me instead of keeping everything at a distance.</p>
+                </div>
+
+                <div class="artifacts-grid">
+                    <div class="artifact-card">
+                        <div class="artifact-image">05</div>
+                        <div class="artifact-content">
+                            <span class="artifact-type">Interview & Photo</span>
+                            <h3 class="artifact-title">Interview Paper with My Mom</h3>
+                            <p class="artifact-reflection">For this assignment we had to interview someone about what they think makes a good life. I picked my mom. Through our conversation, I learned about sacrifices she made that I never really understood before. She left her home country, had to rebuild everything in a new place, and put what my siblings and I needed ahead of her own career goals. The thank you card photo I included shows a little gift I gave her after we talked. This interview was a huge moment of openness for both of us. She shared stuff she usually keeps private, and I let myself really feel how much she has been through. I chose this because it shows how opening yourself to other people's stories makes you understand so much more about what a meaningful life can look like. It is not just about your own experience.</p>
+                        </div>
+                    </div>
+
+                    <div class="artifact-card">
+                        <div class="artifact-image">06</div>
+                        <div class="artifact-content">
+                            <span class="artifact-type">Gratitude Letter</span>
+                            <h3 class="artifact-title">Gratitude Letter to Bita</h3>
+                            <p class="artifact-reflection">We learned about positive psychology interventions in class, and one of them was writing a gratitude letter. I wrote mine to my aunt Bita, who has always been there for me with support and advice. The hard part was not just writing it but actually reading it out loud to her, which felt super awkward and vulnerable. Being that specific and direct about gratitude is not something I usually do. But when I actually read it to her, something changed in our relationship. It became deeper. This artifact is all about exposure because I had to let my feelings be completely seen and heard without hiding behind anything. I picked this because it taught me that the most meaningful moments often come from taking the risk to be emotionally exposed. You have to actually say what you usually just think.</p>
+                        </div>
+                    </div>
+
+                    <div class="artifact-card">
+                        <div class="artifact-image">07</div>
+                        <div class="artifact-content">
+                            <span class="artifact-type">Combined Discussion Posts</span>
+                            <h3 class="artifact-title">The Pursuit of Happiness & Love and Attachments</h3>
+                            <p class="artifact-reflection">These are two discussion posts from the same class module. They both deal with happiness research and attachment theory. In the first one, I looked at whether happiness should be something you aim for directly or if it just happens when you focus on other things. The research actually shows this weird paradox where chasing happiness too hard can backfire. The second post is about my attachment style and how it affects my relationships. I included a screenshot of my brother Mahdiyar love language results, which started this really good conversation between us about how we show we care in totally different ways. I combined these two posts because together they show both intellectual and emotional exposure. Being willing to look at uncomfortable truths about what drives your behavior and how you connect with people. This pairing shows that exposure is both about thinking hard and being emotionally honest at the same time.</p>
+                        </div>
+                    </div>
+
+                    <div class="artifact-card">
+                        <div class="artifact-image">08</div>
+                        <div class="artifact-content">
+                            <span class="artifact-type">Creative Writing</span>
+                            <h3 class="artifact-title">My Family's Immigration Story</h3>
+                            <p class="artifact-reflection">This creative piece was for a different class but it totally connects to understanding the good life. It tells my family story of coming from Iran to the United States. Instead of writing it straight, I mixed up different perspectives. My parents voices, my childhood memories, and my thoughts now all woven together. The piece gets into the complicated feelings around gratitude. How you can be really thankful for new opportunities but also sad about what got left behind. I included this because it shows a different kind of exposure. The risk of sharing family stories that are not just mine to tell. And being honest about feeling conflicted when people expect you to only feel grateful. This artifact taught me that real exposure means being honest about complexity. Not giving people a simplified version that is easier to digest.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- COMPOSITION PAGE -->
+        <section id="composition" class="page-section">
+            <div class="container">
+                <div class="page-header">
+                    <h2>Composition</h2>
+                    <div class="page-divider"></div>
+                    <p class="intro">Composition in photography is about arranging all the elements in your shot. Creating balance, guiding where the viewer looks, making different pieces work together. A well composed life needs the same thing. You have to integrate the different parts like school, relationships, work, fun, helping others, and rest. This page has artifacts that show how I learned to see connections between things that seemed totally separate before. And how to arrange these pieces so my life feels like it makes sense instead of being all over the place and chaotic.</p>
+                </div>
+
+                <div class="artifacts-grid">
+                    <div class="artifact-card">
+                        <div class="artifact-image">09</div>
+                        <div class="artifact-content">
+                            <span class="artifact-type">Research Paper</span>
+                            <h3 class="artifact-title">Annotated Bibliography: A Good Life and Dogs</h3>
+                            <p class="artifact-reflection">This annotated bibliography looks at research about having pets and how it affects your mental health. I explored questions about companionship, responsibility, purpose, and the bond between humans and animals. It started as just academic curiosity but got really personal when I started thinking about actually getting a dog. Suddenly all this research was not just theoretical anymore. It was directly about a major decision in my life. I picked this artifact because it is a perfect example of good composition. Bringing together academic research, personal interest, and a real life choice all into one thing. The bibliography shows how I mixed scientific evidence about stress reduction and social connection with honest questions about whether I am actually ready for that kind of responsibility. This shows that composing a good life means arranging your intellectual questions and practical concerns so they work together instead of being separate.</p>
+                        </div>
+                    </div>
+
+                    <div class="artifact-card">
+                        <div class="artifact-image">10</div>
+                        <div class="artifact-content">
+                            <span class="artifact-type">Video Project</span>
+                            <h3 class="artifact-title">Communications Course Video Project</h3>
+                            <p class="artifact-reflection">For my communications class, I made a video where I interviewed different generations in my family about what success and fulfillment mean to them. I talked to my grandmother, my parents, and my younger cousin. Then I edited all their answers together to show what stays the same and what changes across generations. This project needed compositional thinking in multiple ways. Literally composing the shots and putting the video together. But also intellectually putting together a story that respected each person view while showing bigger patterns. I included this because it shows how skills from one area can help you understand totally different areas. Visual storytelling in this case helping me think about family values and what makes life good. The process taught me that good composition is about respecting each piece while also seeing how they connect to make something bigger than any single part.</p>
+                        </div>
+                    </div>
+
+                    <div class="artifact-card">
+                        <div class="artifact-image">11</div>
+                        <div class="artifact-content">
+                            <span class="artifact-type">Outside Course Artifact</span>
+                            <h3 class="artifact-title">Volunteer Coordination Report (Community Service)</h3>
+                            <p class="artifact-reflection">This report is about my volunteer work coordinating people at a local food bank over the past year. At first I just put it in to show community service. But when I thought about it more, I realized it actually teaches a lot about composition. Managing volunteers means balancing so many different things at once. What the organization needs. Volunteers who have different skills and schedules. Making sure clients are treated with respect. And my own time and energy limits. The report shows how I figured out how to arrange all these pieces well. Making schedules that work for everyone. Creating jobs that make people feel useful and valued. Building systems that keep going even when I am not there. This artifact proves that composing a good life is not just about your own individual choices. It is about how you fit yourself into something with other people and contribute to something bigger than just you.</p>
+                        </div>
+                    </div>
+
+                    <div class="artifact-card">
+                        <div class="artifact-image">12</div>
+                        <div class="artifact-content">
+                            <span class="artifact-type">Reflection Paper</span>
+                            <h3 class="artifact-title">Psychology Class: Reflection on Resilience</h3>
+                            <p class="artifact-reflection">This reflection paper from my psychology class is about resilience research and how it applies to my own life dealing with school pressure, family expectations, and personal setbacks. I looked at how resilience is not about avoiding hard stuff. It is about putting together a response that uses different resources. Social support, being flexible in how you think, finding meaning in things, and practical ways to cope. The paper connects theories about resilience with real examples from my first two years of college. It shows how I learned to use different coping strategies depending on what I was facing. I chose this artifact because it shows sophisticated thinking about composition. Understanding that no one strategy works for everything. Resilience comes from knowing how to arrange your resources in the right way for whatever situation you are dealing with.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DEVELOPMENT PAGE -->
+        <section id="development" class="page-section">
+            <div class="container">
+                <div class="page-header">
+                    <h2>Development</h2>
+                    <div class="page-divider"></div>
+                    <p class="intro">In old school photography, development was the chemical process that turned a blank negative into an actual picture you could see. In digital photography, it is the editing that brings out what the image could really be. Both take patience, skill, and being able to see potential. This page is about my own development. The ongoing process of learning, growing, and becoming more myself. These artifacts show how my thinking about happiness, meaning, and the good life has changed. Not just where I ended up but the whole journey of getting here.</p>
+                </div>
+
+                <div class="artifacts-grid">
+                    <div class="artifact-card">
+                        <div class="artifact-image">13</div>
+                        <div class="artifact-content">
+                            <span class="artifact-type">Course Reflection</span>
+                            <h3 class="artifact-title">Early Semester Reflection: Defining the Good Life</h3>
+                            <p class="artifact-reflection">This early reflection was written in the third week of the semester. It captures what I initially thought about what makes life good. When I read it now, I am kind of shocked at how much my thinking has changed. Back then, I mostly defined the good life as achievement, success, and personal happiness. Basically ideas I picked up from being in a competitive environment and American culture that focuses so much on the individual. I thought happiness was mostly about making smart choices and staying positive. This artifact matters because it shows where I started. The assumptions I walked into this course with. And how far I have come from those first ideas. You have to know where you began to understand your development.</p>
+                        </div>
+                    </div>
+
+                    <div class="artifact-card">
+                        <div class="artifact-image">14</div>
+                        <div class="artifact-content">
+                            <span class="artifact-type">Reading Response</span>
+                            <h3 class="artifact-title">Response to Haidt's "The Happiness Hypothesis"</h3>
+                            <p class="artifact-reflection">My reading response to Jonathan Haidt book was a big moment in how I think. Haidt uses this metaphor of a rider on an elephant. The rider is your rational mind and the elephant is your emotions. This totally changed how I understand human behavior and trying to be happy. Before reading this, I really believed in willpower and making rational decisions. Haidt helped me see that real lasting change happens when you work with your emotional side instead of trying to force it through pure willpower. This artifact shows me wrestling with new ideas that went against what I believed. And trying to actually use this knowledge in my life. Development means you have to be willing to change your mind when you find better explanations for how things work.</p>
+                        </div>
+                    </div>
+
+                    <div class="artifact-card">
+                        <div class="artifact-image">15</div>
+                        <div class="artifact-content">
+                            <span class="artifact-type">Personal Narrative</span>
+                            <h3 class="artifact-title">Learning from Failure: My First Year Struggles</h3>
+                            <p class="artifact-reflection">This narrative essay talks about my rough first year of college. Academic struggles, feeling isolated, questioning if I even belonged here. At first I did not want to include something this vulnerable in my ePortfolio. But then I realized development is not about showing a perfect success story. It is about being real about the messy process of growing. The essay looks at how failure and hard times, even though they sucked, ended up being essential to my growth. By struggling and asking for help, I learned things about myself and what actually matters that I never would have learned if everything had been easy. This artifact is about developing self compassion and a more realistic view of what it means to do well in life. Understanding that growth usually happens through difficulty, not by avoiding it.</p>
+                        </div>
+                    </div>
+
+                    <div class="artifact-card">
+                        <div class="artifact-image">16</div>
+                        <div class="artifact-content">
+                            <span class="artifact-type">Comparative Analysis</span>
+                            <h3 class="artifact-title">Then and Now: How My Definition Has Evolved</h3>
+                            <p class="artifact-reflection">This final artifact is a comparative analysis I wrote just for this ePortfolio. It looks at how my definition of the good life has changed over the semester. I put my early definition next to what I think now and analyzed what shifted. From caring about achievement to caring about meaning. From individual happiness to relationships and helping others. From pleasure based happiness to purpose based happiness. From thinking of happiness as a state you reach to seeing it as an ongoing practice. The analysis includes specific examples from class readings, discussions, and personal experiences that made these changes happen. I chose this artifact because it shows I can observe and explain my own thinking and growth. Development is not just about changing. It is about being aware of how and why you change. And being able to keep developing on purpose going forward.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FINAL REFLECTION -->
+        <section id="reflection" class="page-section">
+            <div class="container">
+                <div class="page-header">
+                    <h2>Final Reflection</h2>
+                    <div class="page-divider"></div>
+                </div>
+
+                <div class="reflection-letter">
+                    <p>Creating this ePortfolio has been one of the most meaningful things I have done in college. Not because it was the hardest or took the most time. But because it asked me to do something different than usual. Most assignments want me to show I know the material. This one wanted me to show I understand myself. Building this portfolio taught me as much as any of the stuff inside it.</p>
+
+                    <h3>What I Learned About Myself</h3>
+
+                    <p>The biggest surprise was seeing patterns I never noticed before. When I was going through potential artifacts to include, I realized the ones I felt most drawn to all had something in common. They all involved bringing ideas together, making connections between different things, and translating between different ways of knowing stuff. The interview with my mom connected personal and scholarly views. The dog research paper linked studies to real life decisions. The video project bridged different generations. The resilience paper tied theory to actual experience.</p>
+
+                    <p>This pattern showed me something important about myself. I am most engaged and most myself when I am connecting things and finding how separate stuff actually fits together. This matters in practical ways. It helps me get why certain classes energize me while others drain me, even when they are equally hard. It points toward careers that might really work for me. Most importantly, it gives me words to explain what I need to do well in life.</p>
+
+                    <p>I also learned my cultural background has shaped me way more than I realized. My Iranian side values education, family loyalty, hospitality, and pushing through hard times. My American side values individual achievement, making your own choices, being authentic, and pursuing happiness. I have been trying to balance these my whole life without really admitting the tension. Working on the Focus page, especially thinking about my cultural identity essay and the Nowruz photo, helped me see I do not have to pick one. My good life will involve honoring both. Finding ways to be ambitious and connected. Independent and loyal. Authentically me and deeply tied to tradition.</p>
+
+                    <h3>What Worked in Building This ePortfolio</h3>
+
+                    <p>The photography metaphor worked way better than I expected. At first I worried it would feel forced or fake. But as I built each page, the metaphor actually helped me think deeper. Focus, exposure, composition, and development are not just clever categories. They really do represent different parts of living well. Thinking through the photography parallel helped me notice things I might have missed.</p>
+
+                    <p>Having to include artifacts from different places was crucial. This course, other classes, personal stuff. If I only used things from this class, it would have felt like a fancy final exam. By bringing in my writing course essay, my psychology reflection, my communications video, and my volunteer work, I could see how thinking about the good life shows up everywhere once you start looking. It is not just one class or one subject.</p>
+
+                    <p>Writing real reflections for each artifact made me go deeper than surface level. I could not just say this shows I value family or this proves I like psychology. I had to explain why each piece mattered, what it revealed, and how it connects to my view of the good life. This deep thinking turned the artifacts from just evidence into actual insight.</p>
+
+                    <h3>What Did Not Work and What I Would Do Differently</h3>
+
+                    <p>I struggled with perfectionism the whole time. I kept changing which artifacts to use, rewriting reflections over and over, second guessing everything. At some point I had to accept this portfolio would never feel done the way a regular paper does. It is a snapshot of my thinking right now. And that thinking will keep changing. If I started over, I would try to accept the work in progress nature earlier. Seeing each version as a draft instead of waiting for some perfect final thing.</p>
+
+                    <p>I also wish I started picking artifacts earlier. I waited pretty late in the semester to really choose things. That meant I was deciding kind of frantically. If I had been collecting possibilities throughout the semester, keeping notes on why certain pieces felt right, the final choices would have felt more natural and less rushed. The lesson is good work comes from paying attention over time, not cramming at the last minute.</p>
+
+                    <p>Another hard thing was writing for multiple audiences at once. I wanted this to matter to my future self, impress my teacher, make sense to my family, and help other students. Trying to satisfy everyone sometimes pulled my writing in different directions. Looking back, I think I should have focused on writing to my future self and trusted that being real would work for the other readers too.</p>
+
+                    <h3>What This Project Means for My Understanding of the Good Life</h3>
+
+                    <p>This ePortfolio has made several things really clear about wellbeing and what it means to flourish. First, the good life is not a place you get to. It is an ongoing practice. Something you keep adjusting like focus, exposure, and arrangement as things change. There is no point where you arrive and can just coast. Living well takes constant attention and adjustment.</p>
+
+                    <p>Second, knowing yourself is important but not enough. Understanding my strengths, values, and tendencies through tests like VIA and MBTI was helpful. But that knowledge only matters if I actually use it to make better choices. The Person Activity Fit Diagnostic showed me which activities fit my personality. But I still have to actually do those activities. Information does not automatically create change.</p>
+
+                    <p>Third, the good life is basically about relationships. The artifacts I am most proud of are all about connection with other people. The interview with my mom, the gratitude letter to Bita, the family immigration story, the volunteer work. Even the individual achievements like my papers happened because of teachers, family support, and communities of people sharing knowledge. This tells me that thinking about wellbeing as just individual is incomplete. We do well in relationship with others or we do not do well at all.</p>
+
+                    <p>Fourth, hard times and discomfort are not things blocking the good life. They are often essential to it. The artifacts that taught me the most all involved being vulnerable and taking risks. The first year struggles essay, the resilience reflection, the scary experience of reading my gratitude letter out loud. Growth needs you to go beyond what is comfortable. Which means some difficulty is just part of development. Not something to avoid.</p>
+
+                    <p>Finally, meaning matters more than happiness, but they are connected. My early definition focused heavily on happiness. Feeling good, enjoying life, having fun. Through this course and making this ePortfolio, I have come to see that meaning is actually the deeper goal. The sense that your life matters and contributes to something beyond just you. Interestingly, research shows that going after meaning is more likely to create lasting happiness than chasing happiness directly. This is the happiness paradox my discussion posts explored. Building this portfolio made that paradox real to me personally, not just something interesting to think about.</p>
+
+                    <h3>Looking Forward</h3>
+
+                    <p>This ePortfolio will be something I come back to over time. When I face big decisions about career, relationships, where to live, how to spend my time, I can look at these reflections and artifacts to remind myself what I care about and who I want to be. When I lose focus, I can return to the Focus page. When I am getting too closed off or careful, the Exposure page can remind me why vulnerability and openness matter. When my life feels all over the place, Composition can help me look for integration. And when I am impatient with my progress, Development can remind me growth takes time and setbacks are part of it.</p>
+
+                    <p>I am also excited to keep building on this. This is not a final statement. It is the beginning of a longer conversation with myself about what makes life worth living. I plan to come back and update this portfolio sometimes. Adding new artifacts, changing reflections as my understanding grows, tracking how my definition of the good life shifts with age and experience. In five years, ten years, twenty years, it will be really interesting to see how my thinking has changed, what stayed the same, and what is different.</p>
+
+                    <p>Most importantly, this project showed me that living well is active and intentional. It does not just happen by default or luck. It needs the kind of careful attention a photographer brings to their work. Deciding what to focus on, how much light to let in, how to arrange things, and how to develop the potential into something meaningful and beautiful. That is the work of a whole life. And I am grateful I got to start here.</p>
+
+                    <p class="signature">Neshat Shahabi<br>Spring 2026</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2026 Neshat Shahabi | A Good Life Through the Lens</p>
+    </footer>
+
+    <script>
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page-section').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
